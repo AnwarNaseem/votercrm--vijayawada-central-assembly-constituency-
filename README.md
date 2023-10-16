@@ -10,7 +10,9 @@ Data taken from website: https://electioncare.in/
 
 **Key Features**:
 
-User Authentication: Implement user signup and login options using email and password or Google Account credentials.
+User Authentication: 
+
+Implement user signup and login options using email and password or Google Account credentials.
 
 **Backend**:
 
