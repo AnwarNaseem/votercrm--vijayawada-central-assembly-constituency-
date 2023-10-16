@@ -1,17 +1,20 @@
 # pip install mysql-connector-python streamlit
+# pip install mysql-connector-python
 import streamlit as st
+from sqlite3 import Cursor
 
-from VoterCRM_database import connection
+from sqlconnection import connection
 
 # Establish a database connection
 def create_server_connection(connection):
     # Implement the logic to create the server connection
-    if connection is None:
+    if connection is not None:
+        connection = create_server_connection()
         try:
             cursor = connection.cursor()
             print(" My SQL database connection successful")
         except Exception as err:
-            print(f"Error:'{err}'")       
+            print(f"Failed to establish a database connection")       
     return connection
 
 def create_and_switch_database(connection, database, switch_db):
@@ -42,7 +45,6 @@ def fetch_voter_data():
         cursor = connection.cursor()
         cursor.execute(" SELECT * FROM VOTER")
         data = cursor.fetchall()
-
         return data
     except Exception as e:
         print(f"Error fetching data: {str(e)}")
@@ -52,14 +54,21 @@ def fetch_voter_data():
 def main():
     st.title("Voter Database")
 
-    # fetch data from voter table
-    voter_data = fetch_voter_data()
-    for row in voter_data:
-        print(row)
+    # Establish a database connection
+    connection = create_server_connection()
 
-    # display the data in a streamlit table
-    st.write("Voter Data")
-    st.table(voter_data)
+    if connection is not None:
+        # Fetch data from voter table
+        voter_data = fetch_voter_data()
+        for row in voter_data:
+            print(row)
+
+        # display the data in a streamlit table
+        st.write("Voter Data")
+        st.table(voter_data)
+    else:
+        st.error("Failed to connect to the database.")
+
 
 def close_connection(connection):
     if connection:
