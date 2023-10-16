@@ -1,4 +1,4 @@
-# Title: Building a Web-Based VoterCRM Application for Vijayawada Central Assembly Constituency
+# Building a Web-Based VoterCRM Application for Vijayawada Central Assembly Constituency
 
 **Intro**:
 
@@ -14,11 +14,15 @@ User Authentication: Implement user signup and login options using email and pas
 
 **Backend**:
 
-Programming Language: Python for general-purpose coding.
-API Endpoint Handling: Python Flask for efficient handling of API endpoints.
-Database Management: SQLAlchemy for seamless SQL operations.
-Database System: MySQL for data storage.
-Deployment: Deploy the application on AWS for robust and scalable hosting.
+*Programming Language: Python for general-purpose coding.
+
+*API Endpoint Handling: Python Flask for efficient handling of API endpoints.
+
+*Database Management: SQLAlchemy for seamless SQL operations.
+
+*Database System: MySQL for data storage.
+
+*Deployment: Deploy the application on AWS for robust and scalable hosting.
 
 
 
