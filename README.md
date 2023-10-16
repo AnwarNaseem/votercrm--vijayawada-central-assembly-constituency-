@@ -6,7 +6,7 @@ Create an innovative and user-friendly VoterCRM (Customer Relationship Managemen
 tailored for the Vijayawada Central Assembly constituency, we aim to provide a comprehensive solution 
 that empowers both voters and candidates to engage effectively during the electoral process.
 
-Dataset taken from website: https://electioncare.in/
+Data taken from website: https://electioncare.in/
 
 **Key Features**:
 
