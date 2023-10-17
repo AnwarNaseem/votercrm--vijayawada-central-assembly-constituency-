@@ -5,8 +5,9 @@ cursor = connection.cursor()
 
 # create tables
 create_login_table = """
-CREATE TABLE IF NOT EXISTS LOGIN (
+CREATE TABLE IF NOT EXISTS USERS (
      User_ID INT AUTO_INCREMENT PRIMARY KEY,
+     Username VARCHAR(20),
      User_Password VARCHAR(20),
      User_role  VARCHAR(10),
      created_at timestamp
