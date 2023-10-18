@@ -4,7 +4,7 @@ from sqlconnection import connection
 cursor = connection.cursor()
 
 # create tables
-create_login_table = """
+create_users_table = """
 CREATE TABLE IF NOT EXISTS USERS (
      User_ID INT AUTO_INCREMENT PRIMARY KEY,
      Username VARCHAR(20),
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS POLICE_CASE (
     FOREIGN KEY (Voter_ID) REFERENCES VOTER(Voter_ID)
 );
 """
-cursor.execute(create_login_table)
+cursor.execute(create_users_table)
 cursor.execute(create_voter_table)
 cursor.execute(create_address_table)
 cursor.execute(create_contact_table)
