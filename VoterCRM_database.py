@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS VOTER (
     Voting_First_Time BOOLEAN,
     Constituency_Name VARCHAR(255) NOT NULL,
     Polling_Booth_Name VARCHAR(255) NOT NULL,
-    FOREIGN KEY(ID) REFERENCES LOGIN(user_ID)
+    FOREIGN KEY(ID) REFERENCES USERS(user_ID)
 );
 """
 
