@@ -73,12 +73,14 @@ CREATE TABLE IF NOT EXISTS VOTER (
 create_address_table = """
 CREATE TABLE IF NOT EXISTS ADDRESS (
     Address_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Voter_ID INT,
     Address VARCHAR(255) NOT NULL,
     Pin_Code VARCHAR(10) NOT NULL,
     Address_Latitude DECIMAL(10, 8) NOT NULL,
     Address_Longitude DECIMAL(11, 8) NOT NULL,
     Street_Name VARCHAR(255) NOT NULL,
-    Ward VARCHAR(10) NOT NULL
+    Ward VARCHAR(10) NOT NULL,
+    FOREIGN KEY(Voter_ID) REFERENCES VOTER(Voter_ID)
 );
 """
 
