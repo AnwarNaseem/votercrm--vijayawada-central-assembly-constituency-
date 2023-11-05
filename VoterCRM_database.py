@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS USERS (
      User_ID INT AUTO_INCREMENT PRIMARY KEY,
      Username VARCHAR(20) not null,
      User_Password VARCHAR(20) not null,
-     User_role  VARCHAR(10) not null,
      created_at timestamp
 );
 """
