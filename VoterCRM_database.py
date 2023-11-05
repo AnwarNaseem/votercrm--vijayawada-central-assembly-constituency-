@@ -9,10 +9,14 @@ CREATE TABLE IF NOT EXISTS USERS (
      User_ID INT AUTO_INCREMENT PRIMARY KEY,
      Username VARCHAR(20) not null,
      User_Password VARCHAR(20) not null,
+     LoggedInTime TIMESTAMP,
+     LoggedOutTime TIMESTAMP, 
+     Duration INT, 
+     Pages_Accessed INT, 
+     Transactions_done INT, 
      created_at timestamp
 );
 """
-
 create_voter_table = """
 CREATE TABLE IF NOT EXISTS VOTER (
     ID INT AUTO_INCREMENT,
