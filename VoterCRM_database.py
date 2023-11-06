@@ -7,16 +7,13 @@ cursor = connection.cursor()
 create_users_table = """
 CREATE TABLE IF NOT EXISTS USERS (
      User_ID INT AUTO_INCREMENT PRIMARY KEY,
-     Username VARCHAR(20) not null,
-     User_Password VARCHAR(20) not null,
-     LoggedInTime TIMESTAMP,
-     LoggedOutTime TIMESTAMP, 
-     Duration INT, 
-     Pages_Accessed INT, 
-     Transactions_done INT, 
-     created_at timestamp
+     Username VARCHAR(20) NOT NULL,
+     User_Password VARCHAR(60) NOT NULL,
+     User_Role ENUM('Voter','Candidate','Party Worker') DEFAULT 'Voter',
+     created_at TIMESTAMP NOT NULL
 );
 """
+
 create_voter_table = """
 CREATE TABLE IF NOT EXISTS VOTER (
     ID INT AUTO_INCREMENT,
@@ -69,7 +66,7 @@ CREATE TABLE IF NOT EXISTS VOTER (
     Voting_First_Time BOOLEAN,
     Constituency_Name VARCHAR(255) NOT NULL,
     Polling_Booth_Name VARCHAR(255) NOT NULL,
-    FOREIGN KEY(ID) REFERENCES USERS(user_ID)
+    FOREIGN KEY(ID) REFERENCES USERS(User_ID)
 );
 """
 
@@ -141,6 +138,62 @@ CREATE TABLE IF NOT EXISTS POLICE_CASE (
     FOREIGN KEY (Voter_ID) REFERENCES VOTER(Voter_ID)
 );
 """
+
+create_payments_table =""" 
+CREATE TABLE PAYMENTS (
+    Payment_ID INT AUTO_INCREMENT PRIMARY KEY,
+    User_ID INT,
+    Payment_DateTime DATETIME,
+    Payment_Amount DECIMAL(10, 2),
+    Currency VARCHAR(3),
+    Payment_Method VARCHAR(255),
+    Payment_Status VARCHAR(50),
+    Payment_Gateway VARCHAR(255),
+    Transaction_ID VARCHAR(255),
+    Order_ID INT UNIQUE,
+    Payment_Source VARCHAR(255),
+    Tax_Amount DECIMAL(10, 2),
+    Payment_Receipt VARCHAR(255),
+    Payment_AuthorizationCode VARCHAR(50),
+    Refund_Information TEXT,
+    FOREIGN KEY (User_ID) REFERENCES USERS(User_ID)
+);
+"""
+
+create_subscriptions_table = """
+CREATE TABLE SUBSCRIPTIONS (
+    Subscription_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Subscription_Type ENUM('individual', 'group'),
+    User_ID INT,
+    Plan_ID INT unique,
+    Start_Date DATE,
+    End_Date DATE,
+    Status ENUM('active', 'pending', 'canceled', 'expired'),
+    Billing_Cycle ENUM('monthly', 'annually'),
+    Payment_Method VARCHAR(255),
+    Auto_Renew ENUM('YES', 'NO'),
+    Price DECIMAL(10, 2),
+    Payment_Status ENUM('Done', 'Pending', 'Failed'),
+    Last_Payment_Date DATE,
+    Next_Billing_Date DATE,
+    Billing_Address VARCHAR(255),
+	FOREIGN KEY (User_ID) REFERENCES USERS(User_ID)
+);
+"""
+
+create_user_activity_table = """
+CREATE TABLE USER_ACTIVITY (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    User_ID INT,
+    LoggedIn_Time TIMESTAMP,
+    LoggedOut_Time TIMESTAMP,
+    Duration INT,
+    Pages_Accessed INT,
+    Transactions_done INT,
+	FOREIGN KEY (User_ID) REFERENCES USERS(User_ID)
+);
+"""
+
 cursor.execute(create_users_table)
 cursor.execute(create_voter_table)
 cursor.execute(create_address_table)
@@ -149,6 +202,9 @@ cursor.execute(create_family_table)
 cursor.execute(create_religion_table)
 cursor.execute(create_political_affiliation_table)
 cursor.execute(create_police_case_table)
+cursor.execute(create_payments_table)
+cursor.execute(create_subscriptions_table)
+cursor.execute(create_user_activity_table)
 
 connection.commit()
 connection.close()
